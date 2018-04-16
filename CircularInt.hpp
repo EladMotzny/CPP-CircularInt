@@ -24,9 +24,16 @@ class CircularInt{
     //Destructor
     ~CircularInt(){}
     //returns the minimum number
-    int getMin(){}
+    int getMin(){
+        return this->min;
+    }
     //returns the maximum number
-    int getMax(){}
+    int getMax(){
+        return this->max;
+    }
+    int getActual(){
+        return this->actual;
+    }
     //+
     friend int operator+(CircularInt a, CircularInt b){
         return (a.min + b.min)%a.max;
