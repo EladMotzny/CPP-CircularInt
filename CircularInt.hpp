@@ -9,16 +9,36 @@ class CircularInt{
 
 
     //Constructor
-    CircularInt(int minNum ,int maxNum);
+    CircularInt(int minNum ,int maxNum){}
     //Destructor
-    ~CircularInt();
+    ~CircularInt(){}
     //returns the minimum number
-    int getMin();
+    int getMin(){}
     //returns the maximum number
-    int getMax();
+    int getMax(){}
     //+
-    int operator+(CircularInt a, CircularInt b);
-    int operator-(CircularInt a, CircularInt b);    
+    int operator+(CircularInt a, CircularInt b){}
+    //-
+    int operator-(CircularInt a, CircularInt b){}    
+    //*
+    // /
+    //+=
+    int operator+=(const CircularInt& b);
+    //-=
+    int operator-=(const CircularInt& b);
+    //--
+    //++
+    //*=
+    ///=
+    //!=
+    //==
+    //>>
+    //<<
+    //<=
+    //>=
+    //=
+    //>
+    //<
 
 
 }
