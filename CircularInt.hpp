@@ -17,7 +17,7 @@ class CircularInt{
         else{
             this->min=minNum;
             this->max=maxNum;
-            this->actual=minNum;
+            this->actual=minNum;//this is for the test commit
         }
     }
     //Destructor
