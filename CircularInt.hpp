@@ -6,10 +6,20 @@ using namespace std;
 class CircularInt{
     int min;
     int max;
+    int actual;
 
 
     //Constructor
-    CircularInt(int minNum ,int maxNum){}
+    CircularInt(int minNum ,int maxNum){
+        if(minNum>=maxNum){
+            cout << "Error! Right number need to be bigger the the left one"<<endl;
+        }
+        else{
+            this->min=minNum;
+            this->max=maxNum;
+            this->actual=minNum;
+        }
+    }
     //Destructor
     ~CircularInt(){}
     //returns the minimum number
