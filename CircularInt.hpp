@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 using namespace std;
 #pragma once
 
@@ -17,9 +18,11 @@ class CircularInt{
     //returns the maximum number
     int getMax(){}
     //+
-    int operator+(CircularInt a, CircularInt b){}
+    friend int operator+(CircularInt a, CircularInt b){
+        return (a.min + b.min)%a.max;
+    }
     //-
-    int operator-(CircularInt a, CircularInt b){}    
+    friend int operator-(CircularInt a, CircularInt b){}    
     //*
     // /
     //+=
@@ -32,8 +35,15 @@ class CircularInt{
     ///=
     //!=
     //==
+
     //>>
     //<<
+    friend ostream& operator<< (ostream& out, const CircularInt& v) {
+        out << "{";
+        out << v.min << v.max;
+        out << "}";
+        return out;
+    }
     //<=
     //>=
     //=
@@ -41,4 +51,4 @@ class CircularInt{
     //<
 
 
-}
+};
