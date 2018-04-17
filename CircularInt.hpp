@@ -67,6 +67,19 @@ using namespace std;
     }
     //*=
     ///=
+    friend int operator/=(CircularInt& a, int num){
+        if(num == 0)
+            return 0;
+        int ans = (int)(a.actual/num);
+        a.actual = ans;
+        if(ans > a.max)
+            a.actual = ans%a.max;
+        else if(ans == a.max)
+            a.actual = a.max;
+        else if(ans <= a.min)
+            a.actual = a.min; 
+        return a.actual;  
+    }
     //!=
     //==
     friend bool operator==(CircularInt a, CircularInt b){
@@ -84,17 +97,17 @@ using namespace std;
     //>=
     //=
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
-    friend bool operator>(CircularInt& a, CircularInt& b){
-        double a_d = a.actual/(a.max-a.min);
-        double b_d = b.actual/(b.max-b.min);
-        if(a_d>b_d)
+    bool operator>(CircularInt& a){
+        double a_d = (double)(a.actual/(a.max-a.min));
+        double b_d = (double)(this->actual/(this->max-this->min));
+        // if(a_d>b_d)
             return true;
         return false;
     }
     //< We compare two actuals as the "part they take" compared to their "whole"(=the bound)
-    friend bool operator<(CircularInt& a, CircularInt& b){
-        double a_d = a.actual/(a.max-a.min);
-        double b_d = b.actual/(b.max-b.min);
+    bool operator<(CircularInt& a){
+        double a_d = (double)(a.actual/(a.max-a.min));//
+        double b_d = (double)(this->actual/(this->max-this->min));
         if(a_d<b_d)
             return true;
         return false;
