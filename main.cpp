@@ -13,8 +13,8 @@ int main() {
 	CircularInt tmp4 (8, 54);
 	cout << hour << endl;							//1
 	cout << (hour)++ << endl;                     // 2
-	hour -= 4;  cout << hour << endl;			//1 because 2-4<MIN so we return MIN 
-	cout << (tmp4-=4) << endl;
+	hour -= 4;  cout << hour << endl;			//10 because 2-4 
+	cout << (tmp4-=4) << endl;					//4 because 8-4
 	cout << (hour==tmp) << endl;				//0 because objects hour and tmp are not equal
 	cout << (hour==tmp2) << endl;				//1 because obj are equal
 	cout << hour+17 << endl;						//6 because 1+17=18%12=6

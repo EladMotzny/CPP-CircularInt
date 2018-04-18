@@ -49,13 +49,10 @@ using namespace std;
 
     //-= updates this->actual's real value after -num
     friend int operator-=(CircularInt& a, int num){
-        int ans = a.actual-num;
-        if(ans > a.max)
-            a.actual = ans%a.max;
-        if(ans == a.max)
-            a.actual = a.max;
-        if(ans <= a.min)
-            a.actual = a.min;
+        int range = a.max-a.min+1;
+        int tmp =(a.actual-a.min-num)%range;
+        int ans = (tmp+range)%range+a.min;
+        a.actual = ans;
 
         return a.actual; 
     }
