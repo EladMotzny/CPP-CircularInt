@@ -11,8 +11,14 @@ int main() {
 	CircularInt tmp2 (1, 12);
 	CircularInt tmp3 (7, 54);
 	CircularInt tmp4 (8, 54);
+	CircularInt tmp5 (1,14);
+	cout << (tmp5!=tmp4) << endl; //should return 1 becaseu they are NOT equal
+	cout << (hour!=tmp2)<<endl;//should return 0 because they ARE equal
+	cout << (tmp5)++ << endl;
+	cout << (tmp5)-- << endl;
 	cout << hour << endl;							//1
 	cout << (hour)++ << endl;                     // 2
+	cout << (hour-4) << endl;	//DELETE THIS BEFORE COMMIT NEED TO FIX
 	hour -= 4;  cout << hour << endl;			//1 because 2-4<MIN so we return MIN 
 	cout << (tmp4-=4) << endl;
 	cout << (hour==tmp) << endl;				//0 because objects hour and tmp are not equal
