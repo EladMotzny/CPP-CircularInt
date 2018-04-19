@@ -35,17 +35,39 @@ using namespace std;
     int getActual(){
         return this->actual;
     }
+
+    int getInRange()
+    {
+        if(this->actual < this->min){
+            return this->max - (this->min - this->actual +1);
+        }
+        else if(this->actual > this->max){
+            //return  this->min + (this->actual-this->max +1);
+            return this->min + (this->actual%this->max);
+        }
+        else
+            return this->actual;
+    }
     //+ add an int to actual size
-    friend int operator+(CircularInt& a, int num){
-        a.actual = (a.actual+num)%a.max;//(std::operator+(a.actual,num))%a.max;
-        return a.actual;
+    friend int operator+(CircularInt a, int num){
+        a.actual = a.actual+num;//(std::operator+(a.actual,num))%a.max;
+        return a.getInRange();
     }
     //-
-    friend int operator-(CircularInt a, CircularInt b){}    
+    //friend int operator-(CircularInt a, CircularInt b){}    
     //*
-    // /
+    // / Divides then puts in range
+    friend int operator/(CircularInt a, int num){
+        if(num == 0){
+             cerr << "Can't divide by zero" << endl;
+             return 0;
+        }
+        a.actual/=num; 
+        a.actual = a.getInRange();
+        return a.actual;
+    }
     //+=
-    int operator+=(const CircularInt& b){}
+    //int operator+=(const CircularInt& b){}
 
     //-= updates this->actual's real value after -num
     friend int operator-=(CircularInt& a, int num){
@@ -59,40 +81,43 @@ using namespace std;
     //--
     //++
     friend int operator++(CircularInt& a, int i){
-        a.actual = (a.actual+1)%a.max;
+        a.actual = a.actual+1;
+        a.actual = a.getInRange();
         return a.actual;
     }
     //*=
     ///=
     friend int operator/=(CircularInt& a, int num){
-        if(num == 0)
-            return 0;
-        int ans = (int)(a.actual/num);
-        a.actual = ans;
-        if(ans > a.max)
-            a.actual = ans%a.max;
-        else if(ans == a.max)
-            a.actual = a.max;
-        else if(ans <= a.min)
-            a.actual = a.min; 
+        if(num == 0){
+             cerr << "Can't divide by zero" << endl;
+             return 0;
+        }
+        a.actual/=num; 
+        a.actual = a.getInRange();
         return a.actual;  
     }
     //!=
-    //==
+    //== Check if obj equals
     friend bool operator==(CircularInt a, CircularInt b){
         if(a.min == b.min && a.max == b.max && a.actual == b.actual)
             return true;
         return false;
     }
     //>>
-    //<<
+    //<< "cout" to obj 
     friend ostream& operator<< (ostream& out, const CircularInt& v) {
         out << v.actual;
         return out;
     }
     //<=
     //>=
-    //=
+    //= 
+    CircularInt& operator= (const CircularInt& b){
+        this->min = b.min;
+        this->max = b.max;
+        this->actual = b.actual;
+        return *this;
+    }
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
         double a_d = (double)(a.actual/(a.max-a.min));
