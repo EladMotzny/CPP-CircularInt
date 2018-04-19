@@ -21,12 +21,20 @@ int main() {
 	cout << (hour-4) << endl;	//DELETE THIS BEFORE COMMIT NEED TO FIX
 	hour -= 4;  cout << hour << endl;			//1 because 2-4<MIN so we return MIN 
 	cout << (tmp4-=4) << endl;
+	CircularInt tmp5 (8,54);
+	cout << hour << endl;							//1
+	cout << (hour)++ << endl;                     // 2
+	hour -= 4;  cout << hour << endl;			//10 because 2-4 
+	cout << (tmp4-=4) << endl;					//51 because 8-4
 	cout << (hour==tmp) << endl;				//0 because objects hour and tmp are not equal
-	cout << (hour==tmp2) << endl;				//1 because obj are equal
-	cout << hour+17 << endl;						//6 because 1+17=18%12=6
+	cout << (hour==hour) << endl;				//1 because obj are equal
+	cout << (hour==tmp3) << endl;				//0 actual in hour changed
+	cout << (hour+17) << endl;					//6 because 1+17=18%12=6
 	cout << (hour > tmp3) << endl;				//1 because 1/47 < 1/12
 	cout << (hour < tmp2) << endl;				//0 because they both=1/12
-	cout << (tmp4/=4) << endl;					//2 because 8/4 
+	cout << (tmp5/=4) << endl;					//47 because 8/4 
+	cout << tmp2 << endl;
+	cout << (tmp2 = tmp5) << endl;
 	// hour += 4;  cout << hour << endl;         // 5
 	// (hour += 2)++;  cout << hour << endl;     // 8
 	// hour += 18;   cout << hour << endl;       // 2   (18 hours after 8)
@@ -36,11 +44,14 @@ int main() {
 	// hour *= 2;   cout << hour << endl;        // 10 (11*2 = 11+11)
 	// cout << hour/2 << endl;                   // TWO OPTIONS: 11 (since 11*2=10) or 5 (since 5*2=10 too).
 
-	// try {
-	// 	cout << hour/3;
-	// } catch (const string& message) {
-	// 	cout << message << endl;     // "There is no number x in {1,12} such that x*3=10"
-	// }
+	try {
+		cout <<  "Actual value "<< hour.getActual()<< endl;
+		cout << hour/3 << endl;
+		cout <<  "Actual value "<< tmp5.getActual()<< endl;
+		cout << tmp5/8 << endl;
+	} catch (const string& message) {
+		cout << message << endl;     // "There is no number x in {1,12} such that x*3=10"
+	}
 
 	// RIDDLES (not for submission): 
 	//  * when is there exactly one answer to a/b?
