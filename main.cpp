@@ -12,6 +12,10 @@ int main() {
 	CircularInt tmp3 (7, 54);
 	CircularInt tmp4 (8, 54);
 	CircularInt tmp5 (1,14);
+	CircularInt tmp6 (3,10);
+	CircularInt tmp7 (5,14);
+	cout << (tmp7*=3) << endl;// should be 11
+	cout << tmp6-3 << endl;
 	cout << (hour <= tmp2) << endl;//should be 1 because they are equal
 	cout << (hour <= tmp4) << endl;//should be 1 because hour<tmp
 	cout << (hour >=tmp2) << endl;//should be 1 because hour equals tmp2

@@ -55,24 +55,32 @@ using namespace std;
         return a.getInRange();
     }
     //- subtract an int from the object
-    friend int operator-(CircularInt a, int num){//NEED TO FIX, DOESNT WORK PROPERLY
-        if((a.actual-num)>0){
-            a.actual = a.actual-num;
+    friend int operator-(CircularInt a, int num){
+        int range = a.max-a.min+1;
+        int tmp =(a.actual-a.min-num)%range;
+        int ans = (tmp+range)%range+a.min;
+        a.actual = ans;
+        return a.actual; 
+    }
+    //*
+    friend int operator*(CircularInt& a, int b){
+        int ans = (a.actual*b)%a.max;
+        if(ans > a.min && ans < a.max){
+            a.actual=ans;
         }
-        else{//formula
-            int abso = abs(a.actual-num);
-            a.actual = a.max-(abso%a.min);
+        else if(ans<a.min){
+            a.actual=ans+a.min;
         }
         return a.actual;
     }
-    //*
-    friend int operator*(CircularInt& a, int b){//TESTING DOESNT WORK
-        int ans = a.actual*b;
-        if(ans > a.max){
-            a.actual = a.min+(ans%a.max);
-        }
-        else{
+    //*=
+    friend int operator*=(CircularInt& a, int b){
+        int ans = (a.actual*b)%a.max;
+        if(ans > a.min && ans < a.max){
             a.actual=ans;
+        }
+        else if(ans<a.min){
+            a.actual=ans+a.min;
         }
         return a.actual;
     }
@@ -87,9 +95,6 @@ using namespace std;
         }
         return a.actual;
     }
-    //-
-    //friend int operator-(CircularInt a, CircularInt b){}    
-    //*
     // / Divides then puts in range
     friend int operator/(CircularInt a, int num){
         if(num == 0){
@@ -127,7 +132,6 @@ using namespace std;
         a.actual = a.getInRange();
         return a.actual;
     }
-    //*=
     ///=
     friend int operator/=(CircularInt& a, int num){
         if(num == 0){
