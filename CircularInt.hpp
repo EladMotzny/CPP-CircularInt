@@ -65,10 +65,6 @@ using namespace std;
         }
         return a.actual;
     }
-
-    //- subtract an object from the object
-    //friend int operator-(CircularInt a, CircularInt b){}
-    
     //*
     friend int operator*(CircularInt& a, int b){//TESTING DOESNT WORK
         int ans = a.actual*b;
@@ -80,7 +76,6 @@ using namespace std;
         }
         return a.actual;
     }
-    // /
     //+=
     friend int operator+=(CircularInt& a, int num){//DONE
         int ans = a.actual+num;
@@ -105,8 +100,6 @@ using namespace std;
         a.actual = a.getInRange();
         return a.actual;
     }
-    //+=
-    //int operator+=(const CircularInt& b){}
 
     //-= updates this->actual's real value after -num
     friend int operator-=(CircularInt& a, int num){
@@ -166,8 +159,24 @@ using namespace std;
         out << v.actual;
         return out;
     }
-    //<=
-    //>=
+    //<= uses the < operator and == operator
+    friend bool operator<=(CircularInt& a, CircularInt& b){
+        if((a < b) || (a == b)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //>= uses the > operator and == operator
+    friend bool operator >=(CircularInt& a, CircularInt& b){
+        if((a > b)||(a == b)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     //= 
     CircularInt& operator= (const CircularInt& b){
         this->min = b.min;

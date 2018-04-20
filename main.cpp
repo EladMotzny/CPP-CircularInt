@@ -12,6 +12,10 @@ int main() {
 	CircularInt tmp3 (7, 54);
 	CircularInt tmp4 (8, 54);
 	CircularInt tmp5 (1,14);
+	cout << (hour <= tmp2) << endl;//should be 1 because they are equal
+	cout << (hour <= tmp4) << endl;//should be 1 because hour<tmp
+	cout << (hour >=tmp2) << endl;//should be 1 because hour equals tmp2
+	cout << (tmp4 >= hour) << endl;//should be 1 because tmp4>hour
 	cout << (tmp5!=tmp4) << endl; //should return 1 becaseu they are NOT equal
 	cout << (hour!=tmp2)<<endl;//should return 0 because they ARE equal
 	cout << (tmp5)++ << endl;
@@ -21,7 +25,7 @@ int main() {
 	cout << (hour-4) << endl;	//DELETE THIS BEFORE COMMIT NEED TO FIX
 	hour -= 4;  cout << hour << endl;			//1 because 2-4<MIN so we return MIN 
 	cout << (tmp4-=4) << endl;
-	CircularInt tmp5 (8,54);
+	//CircularInt tmp5 (8,54);
 	cout << hour << endl;							//1
 	cout << (hour)++ << endl;                     // 2
 	hour -= 4;  cout << hour << endl;			//10 because 2-4 
