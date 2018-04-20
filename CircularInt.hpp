@@ -63,7 +63,7 @@ using namespace std;
         return a.actual; 
     }
     //*
-    friend int operator*(CircularInt& a, int b){
+    friend int operator*(CircularInt& a, int b){//
         int ans = (a.actual*b)%a.max;
         if(ans > a.min && ans < a.max){
             a.actual=ans;
