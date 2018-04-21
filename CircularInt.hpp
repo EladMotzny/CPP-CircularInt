@@ -66,13 +66,19 @@ using namespace std;
     }
     
     //- subtract an int from the object
-    friend int operator-(CircularInt a, int num){
+    friend int operator-(CircularInt& a, int num){
         int range = a.max-a.min+1;
         int tmp =(a.actual-a.min-num)%range;
         int ans = (tmp+range)%range+a.min;
         a.actual = ans;
         return a.actual; 
     }
+    //- subtract CircularInt from int NEED TO DO
+    friend int operator-(int num, CircularInt& a);
+
+    //- if you want to do -CircularInt
+    CircularInt operator-();
+
     //*
     friend int operator*(CircularInt& a, int b){//
         int ans = (a.actual*b)%a.max;
@@ -96,15 +102,15 @@ using namespace std;
         return a.actual;
     }
     //+=
-    friend int operator+=(CircularInt& a, int num){//DONE
-        int ans = a.actual+num;
-        if(ans > a.max){
-            a.actual=a.min+(ans%a.max);
+    CircularInt& operator+=(int num){//DONE
+        int ans = actual+num;
+        if(ans > max){
+            actual=min+(ans%max);
         }
         else{
-            a.actual=ans;
+            actual=ans;
         }
-        return a.actual;
+        return *this;
     }
     // / Divides then puts in range
     friend int operator/(CircularInt a, int num){
@@ -199,6 +205,9 @@ using namespace std;
         this->actual = b.actual;
         return *this;
     }
+    //= if you want to do CircularInt=int
+    CircularInt operator=(const int b);
+
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
         double a_d = (double)(a.actual/(a.max-a.min));
