@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <cmath>
+#include <list>
 using namespace std;
 #pragma once
 
@@ -24,7 +25,7 @@ using namespace std;
         }
     }
     //Copying constructor
-    CircularInt(CircularInt& a){
+    CircularInt(CircularInt &a){
         min=a.min;
         max=a.max;
         actual=a.actual;
