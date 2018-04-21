@@ -5,8 +5,8 @@ using namespace std;
 
 
 int main() {
-	CircularInt hour {1, 12};                 // <hour is an integer between 1 and 12, like an hour on the clock>
-	//CircularInt hour (1, 12);
+	//CircularInt hour {1, 12};                 // <hour is an integer between 1 and 12, like an hour on the clock>
+	CircularInt hour (1, 12);
 	CircularInt tmp (3, 15);
 	CircularInt tmp2 (1, 12);
 	CircularInt tmp3 (7, 54);
