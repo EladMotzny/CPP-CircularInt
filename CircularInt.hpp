@@ -71,7 +71,7 @@ using namespace std;
     }
 
     //- subtract an int from the object
-    friend int operator-(CircularInt& a, int num){
+    friend int operator-(CircularInt a, int num){
         int range = a.max-a.min+1;
         int tmp =(a.actual-a.min-num)%range;
         int ans = (tmp+range)%range+a.min;
@@ -82,7 +82,10 @@ using namespace std;
     friend int operator-(int num, CircularInt& a){
         CircularInt tmp (a.min,a.max);
         tmp.actual=num;
-        return tmp-a;
+        tmp-=a.actual;
+        int ans = tmp.actual;
+        return ans;
+
     }
 
     //- if you want to do -CircularInt JUST A DECLERATION NEED TO TEST
