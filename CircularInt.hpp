@@ -73,13 +73,13 @@ using namespace std;
     //- subtract an int from the object
     //friend int operator-(CircularInt& a, int num){
     //CircularInt& operator-(CircularInt& a, int num){
-    friend int operator-(int num, CircularInt& a){
+    /*friend int operator-(int num, CircularInt& a){
         int range = a.max-a.min+1;
         int tmp =(a.actual-a.min-num)%range;
         int ans = (tmp+range)%range+a.min;
         a.actual = ans;
         return a.actual; 
-    }
+    }*/
     //- subtract CircularInt from int NEED TO TEST
     friend int operator-(int num, CircularInt& a){
         CircularInt tmp (a.min,a.max);
@@ -249,3 +249,10 @@ using namespace std;
     }
 
 };
+inline int operator-(int num, CircularInt& a){
+        int range = a.max-a.min+1;
+        int tmp =(a.actual-a.min-num)%range;
+        int ans = (tmp+range)%range+a.min;
+        a.actual = ans;
+        return a.actual; 
+    }
