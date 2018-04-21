@@ -66,7 +66,9 @@ using namespace std;
         return a.getInRange();
     }
     //+ object + object JUST A DECLERATION
-    //friend int operator+(CircularInt &a,CircularInt &b);
+    friend int operator+(CircularInt &a,CircularInt &b){
+        return a+b.actual;
+    }
 
     //- subtract an int from the object
     friend int operator-(CircularInt& a, int num){
@@ -76,11 +78,18 @@ using namespace std;
         a.actual = ans;
         return a.actual; 
     }
-    //- subtract CircularInt from int JUST A DECLERATION
-    //friend int operator-(int num, CircularInt& a);
+    //- subtract CircularInt from int NEED TO TEST
+    friend int operator-(int num, CircularInt& a){
+        CircularInt tmp (a.min,a.max);
+        tmp.actual=num;
+        return tmp-a;
+    }
 
-    //- if you want to do -CircularInt JUST A DECLERATION
-    //CircularInt operator-();
+    //- if you want to do -CircularInt JUST A DECLERATION NEED TO TEST
+    CircularInt operator-(){
+        int tmp=max;
+        actual=tmp-actual;
+    }
 
     //*
     friend int operator*(CircularInt& a, int b){//
@@ -208,8 +217,15 @@ using namespace std;
         this->actual = b.actual;
         return *this;
     }
-    //= if you want to do CircularInt=int JUST THE DECLERATION
-    //CircularInt operator=(const int b);
+    //= if you want to do CircularInt=int
+    CircularInt operator=(const int b){
+        if(b<min || b>max){
+            cout << "Error! Number is not in range!" << endl;
+        }
+        else{
+            actual=b;
+        }
+    }
 
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
