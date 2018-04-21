@@ -76,7 +76,8 @@ using namespace std;
         int tmp =(a.actual-a.min-num)%range;
         int ans = (tmp+range)%range+a.min;
         a.actual = ans;
-        return a.actual; 
+        //return a.actual; 
+        return a;
     }
     //- subtract CircularInt from int NEED TO TEST
     friend int operator-(int num, CircularInt& a){
@@ -87,8 +88,10 @@ using namespace std;
 
     //- if you want to do -CircularInt JUST A DECLERATION NEED TO TEST
     CircularInt operator-(){
-        int tmp=max;
-        actual=tmp-actual;
+        //int tmp=max;
+        //actual=tmp-actual;
+        actual=max-actual;
+        return *this;
     }
 
     //*
