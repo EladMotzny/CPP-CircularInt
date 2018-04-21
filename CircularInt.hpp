@@ -65,7 +65,9 @@ using namespace std;
         a.actual = a.actual+num;//(std::operator+(a.actual,num))%a.max;
         return a.getInRange();
     }
-    
+    //+ object + object
+    friend int operator+(CircularInt &a,CircularInt &b);//JUST A DECLERATION
+
     //- subtract an int from the object
     friend int operator-(CircularInt& a, int num){
         int range = a.max-a.min+1;
