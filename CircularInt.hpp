@@ -23,8 +23,18 @@ using namespace std;
             this->actual=minNum;
         }
     }
+    //Copying constructor
+    CircularInt(CircularInt& a){
+        min=a.min;
+        max=a.max;
+        actual=a.actual;
+    }
     //Destructor
-    ~CircularInt(){}
+    ~CircularInt(){
+        delete &min;
+        delete &max;
+        delete &actual;
+    }
     //returns the minimum number
     int getMin(){
         return this->min;
@@ -54,6 +64,7 @@ using namespace std;
         a.actual = a.actual+num;//(std::operator+(a.actual,num))%a.max;
         return a.getInRange();
     }
+    
     //- subtract an int from the object
     friend int operator-(CircularInt a, int num){
         int range = a.max-a.min+1;
