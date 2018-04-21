@@ -65,8 +65,8 @@ using namespace std;
         a.actual = a.actual+num;//(std::operator+(a.actual,num))%a.max;
         return a.getInRange();
     }
-    //+ object + object
-    friend int operator+(CircularInt &a,CircularInt &b);//JUST A DECLERATION
+    //+ object + object JUST A DECLERATION
+    //friend int operator+(CircularInt &a,CircularInt &b);
 
     //- subtract an int from the object
     friend int operator-(CircularInt& a, int num){
@@ -76,11 +76,11 @@ using namespace std;
         a.actual = ans;
         return a.actual; 
     }
-    //- subtract CircularInt from int NEED TO DO
-    friend int operator-(int num, CircularInt& a);
+    //- subtract CircularInt from int JUST A DECLERATION
+    //friend int operator-(int num, CircularInt& a);
 
-    //- if you want to do -CircularInt
-    CircularInt operator-();
+    //- if you want to do -CircularInt JUST A DECLERATION
+    //CircularInt operator-();
 
     //*
     friend int operator*(CircularInt& a, int b){//
@@ -208,8 +208,8 @@ using namespace std;
         this->actual = b.actual;
         return *this;
     }
-    //= if you want to do CircularInt=int
-    CircularInt operator=(const int b);
+    //= if you want to do CircularInt=int JUST THE DECLERATION
+    //CircularInt operator=(const int b);
 
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
