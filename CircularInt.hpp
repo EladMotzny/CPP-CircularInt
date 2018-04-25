@@ -2,6 +2,7 @@
 #include <map>
 #include <cmath>
 #include <list>
+#include <cerrno>
 using namespace std;
 #pragma once
 
@@ -248,5 +249,42 @@ using namespace std;
             return true;
         return false;
     }
-
+    //>>
+    friend istream& operator>> (istream& in, CircularInt& v){
+        try{
+            in >> v.min >> v.actual >> v.max;
+            if(v.min < v.max && (v.actual<=v.max && v.actual>=v.min))
+                return in;
+        }
+        catch(const string& message){
+            throw std::invalid_argument("Incorrect values! eneter a minimum then an actual value between the range and then a maximu value!");
+        }
+    }
+    //%
+    friend int operator%(CircularInt a, const int x)
+    {
+        a.actual = a.actual%x;
+        return a.getInRange();
+    }
+    //%=
+    friend int operator%=(CircularInt& a, const int x)
+    {
+        a.actual = a.actual%x;
+        a.actual = a.getInRange();
+        return a.actual;
+    }
+    //^ operator xor
+    friend int operator^ (CircularInt a,CircularInt b)
+    {
+        try{
+            if(a.actual<=0 && b.actual<=0){
+                a.actual = a.actual^b.actual;
+                return a.getInRange();
+            }
+        }
+        catch(const string& message){
+            throw std::invalid_argument( "Can't be a negative value" );
+        }
+    }
+    
 };

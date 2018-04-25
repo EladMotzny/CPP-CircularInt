@@ -5,8 +5,14 @@ using namespace std;
 
 
 int main() {
-	CircularInt hour {1, 12};                 // <hour is an integer between 1 and 12, like an hour on the clock>
+	//CircularInt hour {1, 12};                 // <hour is an integer between 1 and 12, like an hour on the clock>
+	CircularInt hour(1, 12);
+	CircularInt inputTst(5,6);
+	cin >> inputTst;
+	cout << inputTst << endl;
 	cout << hour << endl;                     // 1
+	cout << (hour%6) << endl;
+	cout << (hour^inputTst) << endl;
 	hour += 4;  cout << hour << endl;         // 5
 	(hour += 2)++;  cout << hour << endl;     // 8
 	hour += 18;   cout << hour << endl;       // 2   (18 hours after 8)
