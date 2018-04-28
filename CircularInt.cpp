@@ -5,7 +5,7 @@
 using namespace std;
 #include "CircularInt.hpp"
 
-
+/*
     //Constructor
     CircularInt::CircularInt(int minNum ,int maxNum){
         if(minNum>=maxNum){
@@ -53,3 +53,4 @@ using namespace std;
         else
             return this->actual;
     }
+*/
