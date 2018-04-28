@@ -67,11 +67,9 @@ using namespace std;
         return a.getInRange();
     }
     
-    //NEED TO DO
+    //-OBJECT 
     CircularInt operator-(){
-        //int tmp=max;
-        //actual=tmp-actual;
-        actual=max-actual;
+        this->actual=this->max-this->actual;
         return *this;
     }
 
@@ -85,50 +83,16 @@ using namespace std;
     }
     //CircularInt - CircularInt
     friend int operator-(CircularInt& a, CircularInt& b){
-        int range=a.max-a.min+1;
-        int tmp=(a.actual-b.actual-a.min)%range;
-        int tmp2=tmp+range;
-        int ans=(tmp2%range)-a.min;
-        a.actual=ans;
+        a-b.actual;
         return a.actual;
     }
 
     //int-object
     friend CircularInt operator-(int b, CircularInt& a){
-        int range = a.max - a.min +1;
-        int tmp = (a.actual - a.min - b)%range;
-        int ans = (tmp+range)%range+a.min;
-        a.actual=ans;
-        return a; 
+        a-b;
+        return a;
     }
-
-/*
-    //- subtract an int from the object
-    friend int operator-(CircularInt& a, int num){
-        int range = a.max-a.min+1;
-        int tmp =(a.actual-a.min-num)%range;
-        int ans = (tmp+range)%range+a.min;
-        a.actual = ans;
-        return a.actual; 
-    }
-    //- subtract CircularInt from int NEED TO TEST
-    friend int operator-(int num, CircularInt& a){
-        CircularInt tmp (a.min,a.max);
-        tmp.actual=num;
-        tmp-=a.actual;
-        int ans = tmp.actual;
-        return ans;
-
-    }
-
-    //- if you want to do -CircularInt JUST A DECLERATION NEED TO TEST
-    CircularInt operator-(){
-        //int tmp=max;
-        //actual=tmp-actual;
-        actual=max-actual;
-        return *this;
-    }
-*/
+ 
     //*
     friend int operator*(CircularInt& a, int b){//
         int ans = (a.actual*b)%a.max;
@@ -140,6 +104,18 @@ using namespace std;
         }
         return a.actual;
     }
+    //int * obj
+    friend int operator*(int a, CircularInt& b){
+        return b*a;
+    }
+
+    //obj * obj
+    friend int operator*(CircularInt& a, CircularInt& b){
+        return a*b.actual;
+    }
+
+
+
     //*=
     friend int operator*=(CircularInt& a, int b){
         int ans = (a.actual*b)%a.max;
@@ -152,13 +128,13 @@ using namespace std;
         return a.actual;
     }
     //+=
-    CircularInt& operator+=(int num){//ADD THIS TO EVERYTHING
-        int ans = actual+num;
+    CircularInt& operator+=(int num){
+        int ans = this->actual+num;
         if(ans > max){
-            actual=min+(ans%max);
+            this->actual=this->min+(ans%this->max);
         }
         else{
-            actual=ans;
+            this->actual=ans;
         }
         return *this;
     }
@@ -182,17 +158,31 @@ using namespace std;
 
         return a.actual; 
     }
-    //--
-    friend int operator--(CircularInt& a, int i){//DONE
-        if(a.actual==a.min){
-            a.actual=a.max;
-            return a.actual;
+    //-- postfix
+    CircularInt operator--(int){
+        if(this->actual==this->min){
+            this->actual=this->max;
+            return *this;
         }
         else{
-            a.actual--;
-            return a.actual;
+            this->actual--;
+            return *this;
         }
     }
+
+    //-- prefix
+    CircularInt operator--(){
+        if(this->actual==this->min){
+            this->actual=this->max;
+            return *this;
+        }
+        else{
+            this->actual--;
+            return *this;
+        }
+    }
+    
+
     //++
     friend int operator++(CircularInt& a, int i){
         a.actual = a.actual+1;
@@ -239,6 +229,21 @@ using namespace std;
             return false;
         }
     }
+
+    //obj<=int
+    friend bool operator<=(CircularInt& a, int b){
+        if((a.actual<b)||(a.actual==b)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //int<=obj
+    friend bool operator<=(int a,CircularInt& b){
+        return b<=a;
+    }
+
     //>= uses the > operator and == operator
     friend bool operator >=(CircularInt& a, CircularInt& b){
         if((a > b)||(a == b)){
@@ -248,6 +253,22 @@ using namespace std;
             return false;
         }
     }
+
+    //obj>=int
+    friend bool operator>=(CircularInt& a,int b){
+        if((a.actual>b) || (a.actual==b)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //int>=obj
+    friend bool operator>=(int a,CircularInt& b){
+        return b>=a;
+    }
+
     //= 
     CircularInt& operator= (const CircularInt& b){
         this->min = b.min;
@@ -255,16 +276,7 @@ using namespace std;
         this->actual = b.actual;
         return *this;
     }
-    //= if you want to do CircularInt=int
-    CircularInt& operator=(const int b){
-        if(b<min || b>max){
-            cout << "Error! Number is not in range!" << endl;
-        }
-        else{
-            actual=b;
-        }
-        return *this;
-    }
+    
 
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
