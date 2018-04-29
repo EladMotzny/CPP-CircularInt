@@ -33,9 +33,6 @@ using namespace std;
     }
     //Destructor
     ~CircularInt(){
-        delete &min;
-        delete &max;
-        delete &actual;
     }
     //returns the minimum number
     int getMin(){
@@ -66,7 +63,16 @@ using namespace std;
         a.actual = a.actual+num;//(std::operator+(a.actual,num))%a.max;
         return a.getInRange();
     }
-    
+    // int + Object
+    friend int operator+(int num, CircularInt a){
+        a.actual = a.actual+num;
+                return a.getInRange();
+    }
+    // Object + Object
+    friend int operator+(CircularInt a, CircularInt b){
+        a.actual = a.actual+b.actual;
+                return a.getInRange();
+    }
     //-OBJECT 
     CircularInt operator-(){
         this->actual=this->max-this->actual;
@@ -148,6 +154,27 @@ using namespace std;
         a.actual = a.getInRange();
         return a.actual;
     }
+    // / Int/Object
+    friend int operator/(int num, CircularInt a){
+        if(num == 0){
+             cerr << "Can't divide by zero" << endl;
+             return 0;
+        }
+        a.actual/=num; 
+        a.actual = a.getInRange();
+        return a.actual;
+    }
+    // / Object/Object
+    friend int operator/(CircularInt a, CircularInt b){
+        if(b.actual == 0){
+             cerr << "Can't divide by zero" << endl;
+             return 0;
+        }
+        a.actual/=b.actual; 
+        a.actual = a.getInRange();
+        return a.actual;
+    }
+
 
     //-= updates this->actual's real value after -num
     friend int operator-=(CircularInt& a, int num){
@@ -214,7 +241,14 @@ using namespace std;
             return true;
         return false;
     }
-    //>>
+    // Object == int
+    friend bool operator==(CircularInt a,int b){
+        return (a.actual == b);
+    }
+    // int == Object
+    friend bool operator==(int b, CircularInt a){
+        return (a.actual == b);
+    }
     //<< "cout" to obj 
     friend ostream& operator<< (ostream& out, const CircularInt& v) {
         out << v.actual;
@@ -276,6 +310,11 @@ using namespace std;
         this->actual = b.actual;
         return *this;
     }
+    //Object = int
+    CircularInt& operator= (const int a){
+        this->actual = a;
+        return *this;
+    }
     
 
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
@@ -286,6 +325,14 @@ using namespace std;
             return true;
         return false;
     }
+    //Object > int
+    friend bool operator>(CircularInt& a, int b){
+        return (a.actual > b);
+    }
+    //int > Object
+    friend bool operator>(int b, CircularInt& a){
+        return (b > a.actual);
+    }
     //< We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator<(CircularInt& a){
         double a_d = (double)(a.actual/(a.max-a.min));//
@@ -293,6 +340,14 @@ using namespace std;
         if(a_d<b_d)
             return true;
         return false;
+    }
+    // Object < int
+    friend bool operator<(CircularInt& a, int b){
+        return (a.actual < b);
+    }
+    // int < Object 
+    friend bool operator<(int b, CircularInt& a){
+        return (b < a.actual);
     }
     //>>
     friend istream& operator>> (istream& in, CircularInt& v){
