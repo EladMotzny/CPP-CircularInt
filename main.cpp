@@ -40,7 +40,7 @@ int main() {
 	hour += 18;   cout << hour << endl;       // 2   (18 hours after 8)
 	cout << -hour << endl;                    // 10  (2 hours before midnight)
 	hour = 1 - hour; cout << hour << endl;    // 11  (2 hours before 1)
-	//cout << hour+hour << endl;                // 10 (11 hours after 11)
+	cout << hour+hour << endl;                // 10 (11 hours after 11)
 	hour *= 2;   cout << hour << endl;        // 10 (11*2 = 11+11)
 	cout << hour/2 << endl;                   // TWO OPTIONS: 11 (since 11*2=10) or 5 (since 5*2=10 too).
 
