@@ -89,10 +89,8 @@ using namespace std;
                 return a.getInRange();
     }
     //-OBJECT 
-    CircularInt operator-(){
-        this->actual=this->max-this->actual;
-        this->getInRange();
-        return *this;
+    int operator-(){
+        return this->max-(this->actual%this->max);
     }
 
     //object - int
@@ -143,17 +141,16 @@ using namespace std;
     //*= obj int
     friend int operator*=(CircularInt& a, int b){
         a.actual*=b;
-        a.getInRange();
+        a.actual=a.getInRange();
         return a.actual;
     }
     //*= obj obj
     friend int operator*=(CircularInt& a,CircularInt& b){
-        return a*=b.actual;
+        a.actual*=b.actual;
+        a.actual=a.getInRange();
+        return a.actual;
     }
-    //*= int obj
-    friend int operator*=(int a,CircularInt& b){
-        return b*=a;
-    }
+
     //+= obj int
     CircularInt& operator+=(int n){
         this->actual=this->actual+n;
@@ -164,15 +161,7 @@ using namespace std;
     CircularInt& operator+=(const CircularInt& a){
         return *this+=a.actual;
     }
-    /*//+= int obj
-    int& operator+=(int& n,const CircularInt& a){
-        CircularInt b {a.getMin,a.getMax};
-        b.actual=&n;
-        b+=a;
-        &n=b.actual;
-        return &n;
-    }*/
-
+   
     // / Divides then puts in range
     friend int operator/(CircularInt a, int num){
         if(num == 0){
