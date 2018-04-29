@@ -418,6 +418,37 @@ using namespace std;
             throw std::invalid_argument("Incorrect values! eneter a minimum then an actual value between the range and then a maximu value!");
         }
     }
+    //////////////////////////////////
+    // istream& operator>> (istream& is, CircularInt &a){
+	// 	is >> a.actual >> a.min >> a.max;
+	// 	return is;
+	// }
+	
+	int& operator>>(int& n){
+		n = this->actual;
+		return n;
+	}
+	
+	friend CircularInt& operator>>(int n,CircularInt& a){
+		a.actual=n;
+		a.actual=a.getInRange();
+		return a;
+	}
+	
+	string& operator>>(string& n){
+		string str=to_string(this->actual);
+		n=str;
+		return n;
+	}
+	float& operator>>(float& n){
+		n=(float)this->actual;
+		return n;
+	}
+	double& operator>>(double& n){
+		n=(double)this->actual;
+		return n;
+}
+    /////////////////////////////////////
     //% Object%Object
     CircularInt operator%(const CircularInt &a){
     	CircularInt tmp(this->min,this->max);
@@ -464,3 +495,5 @@ using namespace std;
     }
     
 };
+
+
