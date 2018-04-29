@@ -235,6 +235,12 @@ using namespace std;
             return true;
         }
     }
+    friend bool operator!=(CircularInt a, int b){
+        return a.actual!=b;
+    }
+    friend bool operator!=(int a, CircularInt b){
+        return b.actual!=a;
+    }
     //==
     friend bool operator==(CircularInt a, CircularInt b){
         if(a.min == b.min && a.max == b.max && a.actual == b.actual)
