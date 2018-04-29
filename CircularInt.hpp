@@ -240,11 +240,31 @@ using namespace std;
     
 
     //++
-    friend int operator++(CircularInt& a, int i){
-        a.actual = a.actual+1;
-        a.actual = a.getInRange();
-        return a.actual;
-    }
+    // friend int operator++(CircularInt& a, int i){
+    //     a.actual = a.actual+1;
+    //     a.actual = a.getInRange();
+    //     return a.actual;
+    // }
+    // //++ 
+    // friend int operator++(CircularInt& a, int i){
+    //     a.actual = a.actual+1;
+    //     a.actual = a.getInRange();
+    //     return a.actual;
+    // }
+    // prefix ++ 
+	CircularInt operator++(){
+		this->actual++;
+		this->actual =this->getInRange();
+		return 	*this;
+	}
+	
+	// postfix ++ 
+	CircularInt operator++(int){
+		CircularInt H(*this); // saves the original value
+		this->actual++;
+		this->actual = this->getInRange();
+		return H; // returns the original value	
+}
     ///=
     friend int operator/=(CircularInt& a, int num){
         if(num == 0){
@@ -255,20 +275,23 @@ using namespace std;
         a.actual = a.getInRange();
         return a.actual;  
     }
-    //!=
+    //object!=Object
     friend bool operator!=(CircularInt a, CircularInt b){//DONE
-        if(a==b){
-            return false;
-        }
-        else{
-            return true;
-        }
+        // if(a==b){
+        //     return false;
+        // }
+        // else{
+        //     return true;
+        // }
+        return !(a==b);
     }
+    //object!=int
     friend bool operator!=(CircularInt a, int b){
-        return a.actual!=b;
+        return (a.actual!=b);
     }
+    //int!=object
     friend bool operator!=(int a, CircularInt b){
-        return b.actual!=a;
+        return (b.actual!=a);
     }
     //==
     friend bool operator==(CircularInt a, CircularInt b){
@@ -395,11 +418,29 @@ using namespace std;
             throw std::invalid_argument("Incorrect values! eneter a minimum then an actual value between the range and then a maximu value!");
         }
     }
-    //%
-    friend int operator%(CircularInt a, const int x)
+    //% Object%Object
+    CircularInt operator%(const CircularInt &a){
+    	CircularInt tmp(this->min,this->max);
+    	tmp.actual=this->actual%a.actual;
+    	tmp.actual=tmp.getInRange();
+    	return tmp;
+    }
+    // int%Object
+    friend CircularInt operator%(int a,const CircularInt &b){
+    	CircularInt tmp(b.min,b.max);
+    	tmp.actual= a % b.actual;
+    	tmp.actual=tmp.getInRange();
+    	return tmp;
+    }
+    //Object%int
+    friend CircularInt operator%(const int a, CircularInt &b)
     {
-        a.actual = a.actual%x;
-        return a.getInRange();
+        // a.actual = a.actual%x;
+        // return a.getInRange();
+        CircularInt tmp(b.min,b.max);
+    	tmp.actual= a % b.actual;
+    	tmp.actual=tmp.getInRange();
+    	return tmp;
     }
     //%=
     friend int operator%=(CircularInt& a, const int x)
