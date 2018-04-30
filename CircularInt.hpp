@@ -396,7 +396,7 @@ using namespace std;
 		a.actual=a.getInRange();
 		return a;
 	}
-	
+	/*
 	string& operator>>(string& n){
 		string str=to_string(this->actual);
 		n=str;
@@ -410,6 +410,7 @@ using namespace std;
 		n=(double)this->actual;
 		return n;
 }
+*/
     /////////////////////////////////////
     //% Object%Object
     CircularInt operator%(const CircularInt &a){
