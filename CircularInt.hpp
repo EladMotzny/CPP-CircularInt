@@ -261,7 +261,6 @@ using namespace std;
 		return H; // returns the original value	
 }
     ///=
-    /*
     friend int operator/=(CircularInt& a, int num){
         if(num == 0){
              cerr << "Can't divide by zero" << endl;
@@ -270,17 +269,8 @@ using namespace std;
         a.actual/=num; 
         a.actual = a.getInRange();
         return a.actual;  
-    }*/
-     CircularInt& operator/=(int num){
-        // CircularInt tmp(a.min, a.max);
-        if(num == 0){
-             cerr << "Can't divide by zero" << endl;
-             return;
-        }
-        this->actual/=num; 
-        this->actual = this->getInRange();
-        return *this;
     }
+    
 
     //object!=Object
     friend bool operator!=(CircularInt a, CircularInt b){
