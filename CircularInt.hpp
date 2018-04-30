@@ -377,11 +377,7 @@ using namespace std;
 
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
-        double a_d = (double)(a.actual/(a.max-a.min));
-        double b_d = (double)(this->actual/(this->max-this->min));
-         if(a_d>b_d)
-            return true;
-        return false;
+        return (this->actual > a.actual);
     }
     //Object > int
     friend bool operator>(CircularInt& a, int b){
