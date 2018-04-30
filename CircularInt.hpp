@@ -45,21 +45,7 @@ using namespace std;
     int getActual(){
         return this->actual;
     }
-    /*
-    int getInRange()
-    {
-        if(this->actual < this->min){
-            return this->max - (this->min - this->actual +1);
-        }
-        else if(this->actual > this->max){
-            //return  this->min + (this->actual-this->max +1);
-            //return this->min + (this->actual%this->max);
-            return (this->actual%this->max);
-        }
-        else
-            return this->actual;
-    }*/
-
+    
     int getInRange(){
         if(this->actual<this->min){
             return this->max-((-this->actual)%this->max);
@@ -206,13 +192,6 @@ using namespace std;
         this->getInRange();
         return *this;
     }
-    /*//-= int obj
-    int& operator-=(int& a,const CircularInt& b){
-        CircularInt tmp {b.min,b.max};
-        tmp-=b;
-        a=tmp.actual;
-        return a;
-    }*/
 
     //-- postfix
     CircularInt operator--(int){
@@ -289,53 +268,33 @@ using namespace std;
         out << v.actual;
         return out;
     }
-    //<= uses the < operator and == operator
+    //<= obj<=obj
     friend bool operator<=(CircularInt& a, CircularInt& b){
-        if((a < b) || (a == b)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return a.actual<=b.actual;
     }
 
     //obj<=int
     friend bool operator<=(CircularInt& a, int b){
-        if((a.actual<b)||(a.actual==b)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return a.actual<=b;
     }
     //int<=obj
     friend bool operator<=(int a,CircularInt& b){
-        return b<=a;
+        return b.actual<=a;
     }
 
-    //>= uses the > operator and == operator
+    //>= obj>=obj
     friend bool operator >=(CircularInt& a, CircularInt& b){
-        if((a > b)||(a == b)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return a.actual>=b.actual;
     }
 
     //obj>=int
     friend bool operator>=(CircularInt& a,int b){
-        if((a.actual>b) || (a.actual==b)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return a.actual>=b;
     }
 
     //int>=obj
     friend bool operator>=(int a,CircularInt& b){
-        return b>=a;
+        return a>=b.actual;
     }
 
     //= 
@@ -351,7 +310,7 @@ using namespace std;
         return *this;
     }
     
-
+    /*
     //> We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator>(CircularInt& a){
         double a_d = (double)(a.actual/(a.max-a.min));
@@ -359,7 +318,12 @@ using namespace std;
          if(a_d>b_d)
             return true;
         return false;
+    }*/
+    //obj>obj
+    bool operator>(const CircularInt& a){
+        return this->actual>a.actual;
     }
+
     //Object > int
     friend bool operator>(CircularInt& a, int b){
         return (a.actual > b);
@@ -368,6 +332,7 @@ using namespace std;
     friend bool operator>(int b, CircularInt& a){
         return (b > a.actual);
     }
+    /*
     //< We compare two actuals as the "part they take" compared to their "whole"(=the bound)
     bool operator<(CircularInt& a){
         double a_d = (double)(a.actual/(a.max-a.min));//
@@ -375,7 +340,12 @@ using namespace std;
         if(a_d<b_d)
             return true;
         return false;
+    }*/
+    //obj<obj
+    bool operator<(const CircularInt& a){
+        return this->actual<a.actual;
     }
+
     // Object < int
     friend bool operator<(CircularInt& a, int b){
         return (a.actual < b);
