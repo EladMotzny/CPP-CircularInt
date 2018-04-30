@@ -75,18 +75,24 @@ using namespace std;
                 return a.getInRange();
     }
     //-OBJECT 
-    int operator-(){
-        return this->max-(this->actual%this->max);
+    CircularInt operator-(){
+        CircularInt tmp(this->min,this->max);
+        tmp.actual=this->max-(this->actual%this->max);
+        return tmp;
     }
 
     //object - int
-    friend CircularInt operator-(CircularInt& a, int b){
-        a.actual=a.actual-b;
+    friend CircularInt operator-(const CircularInt& a, int b){
+        /*a.actual=a.actual-b;
         a.actual=a.getInRange();
-        return a;
+        return a;*/
+        CircularInt tmp(a.min,a.max);
+        tmp.actual=tmp.actual-b;
+        tmp.actual=tmp.getInRange();
+        return tmp;
     }
     //CircularInt - CircularInt
-    CircularInt operator-(CircularInt& a){
+    CircularInt operator-(const CircularInt& a){
         CircularInt tmp(this->min,this->max);
         tmp.actual=this->actual-a.actual;
         tmp.actual=tmp.getInRange();
@@ -94,7 +100,7 @@ using namespace std;
     }
 
     //int-object
-    friend CircularInt operator-(int b, CircularInt& a){
+    friend CircularInt operator-(int b,const CircularInt& a){
         CircularInt tmp(a.min,a.max);
         tmp.actual=b-a.actual;
         tmp.actual=tmp.getInRange();
@@ -103,7 +109,7 @@ using namespace std;
     }
  
     //* obj int
-    friend int operator*(CircularInt& a, int b){//
+    friend int operator*(CircularInt& a, int b){
         int ans = (a.actual*b)%a.max;
         if(ans > a.min && ans < a.max){
             a.actual=ans;
@@ -217,19 +223,6 @@ using namespace std;
         }
     }
     
-
-    //++
-    // friend int operator++(CircularInt& a, int i){
-    //     a.actual = a.actual+1;
-    //     a.actual = a.getInRange();
-    //     return a.actual;
-    // }
-    // //++ 
-    // friend int operator++(CircularInt& a, int i){
-    //     a.actual = a.actual+1;
-    //     a.actual = a.getInRange();
-    //     return a.actual;
-    // }
     // prefix ++ 
 	CircularInt operator++(){
 		this->actual++;
