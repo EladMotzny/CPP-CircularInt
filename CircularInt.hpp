@@ -307,22 +307,15 @@ using namespace std;
 
     //= 
     CircularInt& operator= (const CircularInt& b){
-        /*this->min = b.min;
+        this->min = b.min;
         this->max = b.max;
         this->actual = b.actual;
-        return *this;*/
-        CircularInt tmp(b.min,b.max);
-        tmp.actual=b.actual;
-        return tmp;
+        return *this;
     }
     //Object = int
     CircularInt& operator= (const int a){
-        /*this->actual = a;
-        return *this;*/
-        CircularInt tmp(this->min,this->max);
-        tmp.actual=a;
-        tmp.actual=tmp.getInRange();
-        return tmp;
+        this->actual = a;
+        return *this;
     }
     
     
