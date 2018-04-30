@@ -261,9 +261,7 @@ using namespace std;
     }
     //==
     friend bool operator==(CircularInt a, CircularInt b){
-        if(a.min == b.min && a.max == b.max && a.actual == b.actual)
-            return true;
-        return false;
+        return ((a.min == b.min) && (a.max == b.max) && (a.actual == b.actual));
     }
     // Object == int
     friend bool operator==(CircularInt a,int b){
@@ -309,15 +307,22 @@ using namespace std;
 
     //= 
     CircularInt& operator= (const CircularInt& b){
-        this->min = b.min;
+        /*this->min = b.min;
         this->max = b.max;
         this->actual = b.actual;
-        return *this;
+        return *this;*/
+        CircularInt tmp(b.min,b.max);
+        tmp.actual=b.actual;
+        return tmp;
     }
     //Object = int
     CircularInt& operator= (const int a){
-        this->actual = a;
-        return *this;
+        /*this->actual = a;
+        return *this;*/
+        CircularInt tmp(this->min,this->max);
+        tmp.actual=a;
+        tmp.actual=tmp.getInRange();
+        return tmp;
     }
     
     
