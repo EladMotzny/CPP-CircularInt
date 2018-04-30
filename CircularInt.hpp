@@ -107,7 +107,7 @@ using namespace std;
         return tmp;
         
     }
- 
+ /*
     //* obj int
     friend int operator*(CircularInt& a, int b){
         int ans = (a.actual*b)%a.max;
@@ -119,6 +119,7 @@ using namespace std;
         }
         return a.actual;
     }
+    
     //int * obj
     friend int operator*(int a, CircularInt& b){
         return b*a;
@@ -127,15 +128,37 @@ using namespace std;
     //obj * obj
     friend int operator*(CircularInt& a, CircularInt& b){
         return a*b.actual;
+    }    
+    */
+   
+    //int * obj
+    friend CircularInt operator*(int a, const CircularInt& b){
+        CircularInt tmp(b.min,b.max);
+        tmp.actual=b.actual*a;
+        tmp.actual=tmp.getInRange();
+        return tmp;
     }
-
-
+    //obj * obj
+    friend CircularInt operator*(const CircularInt& a,const CircularInt& b){
+        CircularInt tmp(a.min,a.max);
+        tmp.actual=a.actual*b.actual;
+        tmp.actual=tmp.getInRange();
+        return tmp;
+    }
+    //obj * int
+    friend CircularInt operator*(const CircularInt& b, int a){
+        CircularInt tmp(b.min,b.max);
+        tmp.actual=b.actual*a;
+        tmp.actual=tmp.getInRange();
+        return tmp;
+    }
     //*= obj int
     friend int operator*=(CircularInt& a, int b){
         a.actual*=b;
         a.actual=a.getInRange();
         return a.actual;
     }
+
     //*= obj obj
     friend int operator*=(CircularInt& a,CircularInt& b){
         a.actual*=b.actual;
