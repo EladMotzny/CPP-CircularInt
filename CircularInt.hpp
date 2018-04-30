@@ -108,7 +108,7 @@ using namespace std;
         
     }
  /*
-    //* obj int
+    // obj * int
     friend int operator*(CircularInt& a, int b){
         int ans = (a.actual*b)%a.max;
         if(ans > a.min && ans < a.max){
@@ -130,7 +130,7 @@ using namespace std;
         return a*b.actual;
     }    
     */
-   
+
     //int * obj
     friend CircularInt operator*(int a, const CircularInt& b){
         CircularInt tmp(b.min,b.max);
